@@ -1,3 +1,5 @@
+// Detecting button press
+
 var elements = document.querySelectorAll(".drum")
 
     for (i=0; i < elements.length; i++){
@@ -7,12 +9,16 @@ var elements = document.querySelectorAll(".drum")
 
         var buttonInnerHTML = this.innerHTML;
         makeSound(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
         
         })
     }
 
+    // Detecting keyboard press
+
     document.addEventListener("keydown", function(event){
         makeSound(event.key);
+        buttonAnimation(event.key);
     })
 
    function makeSound (key){
@@ -57,4 +63,12 @@ var elements = document.querySelectorAll(".drum")
         default: console.log(buttonInnerHTML);
     }
 
+   }
+
+   function buttonAnimation(currentKey){
+       var activeButton = document.querySelector("."+currentKey);
+       activeButton.classList.add("pressed");
+       setTimeout(function() {
+        activeButton.classList.remove("pressed");
+       }, 100);
    }
